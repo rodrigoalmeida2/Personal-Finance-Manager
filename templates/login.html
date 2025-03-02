@@ -4,28 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_cadastro.css') }}">
 </head>
 <body>
-    <h1>Login</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    <form method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
-        
-        <button type="submit">Entrar</button>
+    <form class="all" method="POST">
+        <div class="imgcontainer">
+            <img src="static/img/chica_0.jpeg" alt="Avatar" class="avatar">
+        </div>
+        <div class="container">
+            <label for="nome">Nome</label>
+            <input type="text" placeholder="USUÁRIO" id="nome" name="nome" required>
+            
+            <label for="senha">Senha</label>
+            <input type="password" placeholder="SENHA" id="senha" name="senha" required>
+            
+            <button type="submit">Login</button>
+        </div>
+        <p class="PPs">Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
     </form>
-    <p>Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+    
 </body>
 </html>

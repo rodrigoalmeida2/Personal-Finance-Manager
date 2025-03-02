@@ -5,12 +5,12 @@ from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
 app = Flask(__name__)
-app.secret_key = "sua_chave_secreta_aqui"  # Necessário para usar sessões
 
 load_dotenv()
 
-# Configuração do banco de dados
+app.secret_key = os.getenv("SECRET_KEY") 
 
+# Configuração do banco de dados
 engine = create_engine(os.getenv("DATABASE_URL"), echo=True)
 Base.metadata.create_all(engine)
 gerenciador = GerenciadorFinancas(engine)
