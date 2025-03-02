@@ -7,18 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Bem-vindo, {{ nome }}!</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    <h2>Adicionar Transação</h2>
-    <form method="POST" action="{{ url_for('adicionar_transacao') }}">
+    <h1 id="welcome-message">Bem-vindo, {{ nome }}!</h1>
+
+    <!-- Mensagens Flash (serão preenchidas dinamicamente com JavaScript) -->
+    <ul id="flash-messages"></ul>
+
+    <!-- Botão para mostrar/ocultar o formulário de adicionar transação -->
+    <button id="mostrar-formulario">Adicionar Transação</button>
+
+    <!-- Formulário de Adicionar Transação (inicialmente oculto) -->
+    <form id="transacao-form" method="POST" style="display: none;">
         <label for="descricao">Descrição:</label>
         <input type="text" id="descricao" name="descricao" required>
         
@@ -33,19 +31,34 @@
         
         <button type="submit">Adicionar</button>
     </form>
+
     <h2>Ações</h2>
     <ul>
-        <li><a href="{{ url_for('consultar_saldo') }}">Consultar Saldo</a></li>
-        <li><a href="{{ url_for('listar_transacoes') }}">Listar Transações</a></li>
-        <li><a href="{{ url_for('logout') }}">Sair</a></li>
+        <li><a href="#" id="consultar-saldo">Consultar Saldo</a></li>
+        <li><a href="#" id="listar-transacoes">Listar Transações</a></li>
+        <li><a href="#" id="logout">Sair</a></li>
     </ul>
-    {% if transacoes %}
+
+    <!-- Popup para Consultar Saldo -->
+    <div id="saldo-popup" class="popup">
+        <h2>Saldo Atual</h2>
+        <p>Seu saldo é: R$ <span id="popup-saldo-valor">0.00</span></p>
+        <button id="fechar-saldo-popup">Fechar</button>
+    </div>
+
+    <!-- Popup para Listar Transações -->
+    <div id="transacoes-popup" class="popup">
         <h2>Suas Transações</h2>
-        <ul>
-            {% for transacao in transacoes %}
-                <li>{{ transacao.descricao }} - R$ {{ transacao.valor }} ({{ transacao.tipo }})</li>
-            {% endfor %}
+        <ul id="popup-transacoes-list">
+            <!-- As transações serão adicionadas aqui via JavaScript -->
         </ul>
-    {% endif %}
+        <button id="fechar-transacoes-popup">Fechar</button>
+    </div>
+
+    <!-- Overlay para os popups -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Script JavaScript -->
+    <script src="static/js/principal.js"></script> <!-- Link para o arquivo JavaScript -->
 </body>
 </html>

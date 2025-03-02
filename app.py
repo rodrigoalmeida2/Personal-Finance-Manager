@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from gerenciador import GerenciadorFinancas
 from models import Base
 from sqlalchemy import create_engine
@@ -71,9 +71,7 @@ def adicionar_transacao():
         gerenciador.adicionar_transacao(session['usuario_id'], descricao, valor, tipo)
         flash("Transação adicionada com sucesso!")
     except ValueError as e:
-        flash(str(e))
-    
-    return redirect(url_for('principal'))
+        return jsonify({"error": str(e)}), 400
 
 # Rota para consultar saldo
 @app.route('/consultar_saldo')
@@ -82,8 +80,7 @@ def consultar_saldo():
         return redirect(url_for('login'))
     
     saldo = gerenciador.consultar_saldo(session['usuario_id'])
-    flash(f"Seu saldo atual é: R$ {saldo:.2f}")
-    return redirect(url_for('principal'))
+    return jsonify({"saldo": saldo})
 
 # Rota para listar transações
 @app.route('/listar_transacoes')
@@ -92,7 +89,9 @@ def listar_transacoes():
         return redirect(url_for('login'))
     
     transacoes = gerenciador.listar_transacoes(session['usuario_id'])
-    return render_template('principal.html', transacoes=transacoes, nome=session['usuario_nome'])
+    return jsonify({"transacoes": [
+        {"descricao": t.descricao, "valor": t.valor, "tipo": t.tipo} for t in transacoes
+    ]})
 
 # Rota de logout
 @app.route('/logout')

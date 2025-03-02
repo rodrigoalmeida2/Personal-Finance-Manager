@@ -1,0 +1,37 @@
+<h1 id="welcome-message">Bem-vindo, {{ nome }}!</h1>
+
+    <!-- Mensagens Flash (serão preenchidas dinamicamente com JavaScript) -->
+    <ul id="flash-messages"></ul>
+
+    <h2>Adicionar Transação</h2>
+    <form id="transacao-form" method="POST">
+        <label for="descricao">Descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+        
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" name="valor" step="0.01" required>
+        
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo" required>
+            <option value="receita">Receita</option>
+            <option value="despesa">Despesa</option>
+        </select>
+        
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h2>Ações</h2>
+    <ul>
+        <li><a href="{{ url_for('consultar_saldo') }}" id="consultar-saldo">Consultar Saldo</a></li>
+        <li><a href="{{ url_for('listar_transacoes') }}" id="listar-transacoes">Listar Transações</a></li>
+        <li><a href="{{ url_for('logout') }}" id="logout">Sair</a></li>
+    </ul>
+
+    <!-- Lista de Transações (será preenchida dinamicamente com JavaScript) -->
+    <h2>Suas Transações</h2>
+    <ul id="transacoes-list">
+        <!-- As transações serão adicionadas aqui via JavaScript -->
+    </ul>
+
+    <!-- Script JavaScript -->
+    <script src="static\js\principal.js"></script> <!-- Link para o arquivo JavaScript -->
