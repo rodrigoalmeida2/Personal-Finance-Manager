@@ -68,6 +68,10 @@ button:hover {
     margin: 24px 0 12px 0;
 }
 
+.error {
+    text-align: center;
+}
+
 /* Avatar image */
 img.avatar {
     width: 100%;

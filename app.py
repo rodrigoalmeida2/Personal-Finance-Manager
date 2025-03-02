@@ -24,30 +24,82 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        nome = request.form['nome']
-        senha = request.form['senha']
+        # Verifica se os dados foram enviados como JSON (para requisições AJAX)
+        if request.is_json:
+            data = request.get_json()
+            nome = data.get('nome')
+            senha = data.get('senha')
+        
         usuario = gerenciador.buscar_usuario(nome)
         
         if usuario and usuario.senha == senha:
             session['usuario_id'] = usuario.id
             session['usuario_nome'] = usuario.nome
-            return redirect(url_for('principal'))
+            
+            # Retorna uma resposta JSON para requisições AJAX
+            if request.is_json:
+                return jsonify({"success": True, "redirect": url_for('principal')})
+            else:
+                # Redireciona para a página principal em requisições tradicionais
+                return redirect(url_for('principal'))
         else:
-            flash("Credenciais inválidas. Tente novamente.")
+            # Retorna uma resposta JSON para requisições AJAX
+            if request.is_json:
+                return jsonify({"success": False, "message": "Credenciais inválidas. Tente novamente."})
+            else:
+                # Usa flash para mensagens de erro em requisições tradicionais
+                flash("Credenciais inválidas. Tente novamente.")
+                return render_template('login.html')
+    
+    # Renderiza o template de login para requisições GET
     return render_template('login.html')
 
 # Rota de cadastro
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
     if request.method == 'POST':
-        nome = request.form['nome']
-        senha = request.form['senha']
+        # Verifica se os dados foram enviados como JSON (para requisições AJAX)
+        if request.is_json:
+            data = request.get_json()
+            nome = data.get('nome')
+            senha = data.get('senha')
+        else:
+            # Caso contrário, assume que os dados foram enviados via formulário tradicional
+            nome = request.form.get('nome')
+            senha = request.form.get('senha')
+        
         try:
+            usuario = gerenciador.buscar_usuario(nome)
+        
+            if usuario.nome == nome and usuario.senha == senha:
+                return jsonify({"success": False, "message": "Usuário existente!"})
+            
             gerenciador.adicionar_usuario(nome, senha)
-            flash("Cadastro realizado com sucesso! Faça login.")
-            return redirect(url_for('login'))
+            
+            # Retorna uma resposta JSON para requisições AJAX
+            if request.is_json:
+                return jsonify({
+                    "success": True,
+                    "message": "Cadastro realizado com sucesso! Faça login.",
+                    "redirect": url_for('login')
+                })
+            else:
+                # Usa flash para mensagens de sucesso em requisições tradicionais
+                flash("Cadastro realizado com sucesso! Faça login.")
+                return redirect(url_for('login'))
         except ValueError as e:
-            flash(str(e))
+            # Retorna uma resposta JSON para requisições AJAX
+            if request.is_json:
+                return jsonify({
+                    "success": False,
+                    "message": str(e)
+                })
+            else:
+                # Usa flash para mensagens de erro em requisições tradicionais
+                flash(str(e))
+                return render_template('cadastro.html')
+    
+    # Renderiza o template de cadastro para requisições GET
     return render_template('cadastro.html')
 
 # Rota da página principal (após login)

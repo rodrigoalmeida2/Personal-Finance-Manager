@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/login_cadastro.css') }}">
+    <link rel="stylesheet" href="static\css\login_cadastro.css">
 </head>
 <body>
-    <form class="all" method="POST">
+    <form id="cadastro-form" class="all" method="POST">
         <div class="imgcontainer">
             <img src="static\img\cadastro.png" alt="Avatar" class="avatar">
         </div>
@@ -21,6 +21,11 @@
             <button type="submit">Cadastrar</button>
         </div>
         <p class="PPs">Já tem uma conta? <a href="{{ url_for('login') }}">Faça login</a></p>
+        <!-- Mensagem de erro -->
+        <p id="error-message" class="error" style="color: red; display: none;"></p>
     </form>
+
+    <!-- Script JavaScript -->
+    <script src="static/js/cadastro.js"></script>
 </body>
 </html>

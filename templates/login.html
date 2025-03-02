@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login_cadastro.css') }}">
 </head>
 <body>
-    <form class="all" method="POST">
+    <form id="login-form" class="all" method="POST">
         <div class="imgcontainer">
             <img src="static\img\login.png" alt="Avatar" class="avatar">
         </div>
@@ -21,7 +21,13 @@
             <button type="submit">Login</button>
         </div>
         <p class="PPs">Não tem uma conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+        <!-- Mensagem de erro -->
+        <p id="error-message" class="error" style="color: red; display: none;"></p>
+    
     </form>
+
+    <!-- Script JavaScript -->
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
     
 </body>
 </html>
