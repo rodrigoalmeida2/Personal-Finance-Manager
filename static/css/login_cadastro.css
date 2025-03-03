@@ -78,6 +78,18 @@ img.avatar {
     border-radius: 50%;
 }
 
+.pop {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
 /* Add padding to containers */
 .container {
     padding: 16px;

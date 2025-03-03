@@ -4,60 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="static\css\principal.css">
 </head>
 <body>
-    <h1 id="welcome-message">Bem-vindo, {{ nome }}!</h1>
+    <div class="all">
+        <h1 id="welcome-message">Bem-vindo, {{ nome }}!</h1>
 
-    <!-- Mensagens Flash (serão preenchidas dinamicamente com JavaScript) -->
-    <ul id="flash-messages"></ul>
+        <!-- Mensagens Flash (serão preenchidas dinamicamente com JavaScript) -->
+        <ul id="flash-messages"></ul>
 
-    <!-- Botão para mostrar/ocultar o formulário de adicionar transação -->
-    <button id="mostrar-formulario">Adicionar Transação</button>
+        <h2>O que você quer fazer hoje?</h2>
+        <ul>
+            <li>
+                <img src="static/img/add.png" alt="Adicionar">
+                <button id="mostrar-formulario" class="mf">Adicionar Transação</button>
+            </li>
+            <li>
+                <img src="static/img/wallet.png" alt="Saldo">
+                <a href="#" id="consultar-saldo">Consultar Saldo</a>
+            </li>
+            <li>
+                <img src="static/img/transacoes.png" alt="Transações">
+                <a href="#" id="listar-transacoes">Listar Transações</a>
+            </li>
+            
+            <li class="dif">
+                <form id="transacao-form" class="form" method="POST" style="display: none;">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" name="descricao" required>
+                    
+                    <label for="valor">Valor</label>
+                    <input type="number" id="valor" name="valor" step="0.01" required>
+                    
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="receita">Receita</option>
+                        <option value="despesa">Despesa</option>
+                    </select>
+                    
+                    <button type="submit">Adicionar</button>
+                </form>
+            </li>
 
-    <!-- Formulário de Adicionar Transação (inicialmente oculto) -->
-    <form id="transacao-form" method="POST" style="display: none;">
-        <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao" required>
-        
-        <label for="valor">Valor:</label>
-        <input type="number" id="valor" name="valor" step="0.01" required>
-        
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo" required>
-            <option value="receita">Receita</option>
-            <option value="despesa">Despesa</option>
-        </select>
-        
-        <button type="submit">Adicionar</button>
-    </form>
-
-    <h2>Ações</h2>
-    <ul>
-        <li><a href="#" id="consultar-saldo">Consultar Saldo</a></li>
-        <li><a href="#" id="listar-transacoes">Listar Transações</a></li>
-        <li><a href="#" id="logout">Sair</a></li>
-    </ul>
-
-    <!-- Popup para Consultar Saldo -->
-    <div id="saldo-popup" class="popup">
-        <h2>Saldo Atual</h2>
-        <p>Seu saldo é: R$ <span id="popup-saldo-valor">0.00</span></p>
-        <button id="fechar-saldo-popup">Fechar</button>
-    </div>
-
-    <!-- Popup para Listar Transações -->
-    <div id="transacoes-popup" class="popup">
-        <h2>Suas Transações</h2>
-        <ul id="popup-transacoes-list">
-            <!-- As transações serão adicionadas aqui via JavaScript -->
+            <li>
+                <img src="static/img/logout.png" alt="Sair">
+                <a href="#" id="logout">Sair</a>
+            </li>
         </ul>
-        <button id="fechar-transacoes-popup">Fechar</button>
+        
+        <!-- Popup para Consultar Saldo -->
+        <div id="saldo-popup" class="popup">
+            <h2>Saldo Atual</h2>
+            <p>Seu saldo é: R$ <span id="popup-saldo-valor">0.00</span></p>
+            <button id="fechar-saldo-popup" class="pop">Fechar</button>
+        </div>
+
+        <!-- Popup para Listar Transações -->
+        <div id="transacoes-popup" class="popup">
+            <h2>Suas Transações</h2>
+            <ul id="popup-transacoes-list">
+                <!-- As transações serão adicionadas aqui via JavaScript -->
+            </ul>
+            <button id="fechar-transacoes-popup" class="pop">Fechar</button>
+        </div>
+
+        <!-- Overlay para os popups -->
+        <div id="overlay" class="overlay"></div>
     </div>
-
-    <!-- Overlay para os popups -->
-    <div id="overlay" class="overlay"></div>
-
     <!-- Script JavaScript -->
     <script src="static/js/principal.js"></script> <!-- Link para o arquivo JavaScript -->
 </body>

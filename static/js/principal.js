@@ -84,6 +84,8 @@ form.addEventListener('submit', function (e) {
             const newTransacao = document.createElement('li');
             newTransacao.textContent = `${data.transacao.descricao} - R$ ${data.transacao.valor} (${data.transacao.tipo})`;
             transacaoList.appendChild(newTransacao);
+            document.getElementById('descricao').value = '';
+            document.getElementById('valor').value = '';
         }
     });
 });
@@ -94,4 +96,23 @@ document.querySelector('#logout').addEventListener('click', function (e) {
     .then(() => {
         window.location.href = '/login';
     });
+});
+
+// Captura o formulário pelo ID
+const transacaoForm = document.getElementById('transacao-form');
+
+// Adiciona um ouvinte de evento para o envio do formulário
+transacaoForm.addEventListener('submit', function (event) {
+    // Impede o comportamento padrão de recarregar a página
+    event.preventDefault();
+
+    // Obtém os valores dos campos
+    const descricao = document.getElementById('descricao');
+    const valor = document.getElementById('valor');
+    const tipo = document.getElementById('tipo');
+
+    // Limpa os campos após o envio
+    descricao.value = '';
+    valor.value = '';
+    tipo.selectedIndex = 0; // Reseta o campo <select> para a primeira opção
 });

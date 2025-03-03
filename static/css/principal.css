@@ -1,0 +1,222 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #d0f7e8;
+}
+
+.all {
+    text-align: center;
+    border: 3px solid #ffffff;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 90%;
+    height: 100vh;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+li {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+li:hover {
+    transform: scale(1.05);
+}
+
+li img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+li a, li button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+li a:hover, li button:hover {
+    background-color: #037f50;
+}
+
+.form {
+    display: flex;
+    padding: auto;
+    width: 90%;
+}
+
+/* Popups */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 8px;
+}
+
+#saldo-popup {
+    width: 250px;  /* Aumenta a largura do popup */
+    height: auto;  /* Ajusta a altura automaticamente conforme o conteúdo */
+    padding: 20px; /* Adiciona um espaçamento interno para melhor aparência */
+    text-align: center; /* Centraliza o texto dentro do popup */
+    border-radius: 10px; /* Mantém um design arredondado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Mantém a sombra para destacar */
+}
+
+.pop {
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Estilos específicos para a lista dentro do popup */
+#popup-transacoes-list {
+    max-height: 500px; /* Define um limite para ativar o scroll */
+    overflow-y: auto; /* Habilita rolagem apenas quando necessário */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+#popup-transacoes-list li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    width: 60%;
+    height: 50%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+}
+
+#popup-transacoes-list li:last-child {
+    border-bottom: none;
+}
+
+#popup-transacoes-list li span {
+    font-weight: bold;
+}
+
+/* Estilização da caixa do formulário */
+#transacao-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 500px;
+    margin-left: 8px;
+}
+
+/* Estiliza os rótulos e inputs para ficarem lado a lado */
+#transacao-form label {
+    display: inline-block;
+    width: 30%;
+    font-weight: bold;
+}
+
+#transacao-form input,
+#transacao-form select {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botão dentro do formulário */
+#transacao-form button {
+    width: 50%;
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#transacao-form button:hover {
+    opacity: 0.8;
+}
+
+.dif {
+    all: unset;
+}
